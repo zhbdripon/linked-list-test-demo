@@ -23,10 +23,13 @@ class MyLinkedList(object):
         self.head = node
 
     def addAtTail(self, val):
-        cur = self.head
-        while cur.next:
-            cur = cur.next
-        cur.next = Node(val,None)
+        if self.head is None:
+            self.head = Node(val,None)
+        else:
+            cur = self.head
+            while cur.next:
+                cur = cur.next
+            cur.next = Node(val,None)
 
     def addAtIndex(self, index, val):
         if index == 0:
