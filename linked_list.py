@@ -62,6 +62,7 @@ class MyLinkedList(object):
             prv = cur
             cur = cur.next
             cur_index+=1
+        return -1
 
     def __str__(self):
         ret = ""
