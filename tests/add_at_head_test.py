@@ -1,78 +1,73 @@
-from linked_list import MyLinkedList
-from random import randint
+from tests.utils import perform_operations
 import unittest
 
 class AddAtHeadTest(unittest.TestCase):
-    def setUp(self):
-        self.list = MyLinkedList()
-
-    def populate_list(self,total):
-        for i in range(0,total):
-            self.list.addAtHead(randint(1,1000))
 
     def test_add_at_head_empty_list(self):
-        self.list.addAtHead(42)
-        self.assertEqual(42,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtHead", "get" ]
+        params = [ [] , [42] , [0] ]
+        expected_output = [[None], [None], [42]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_in_a_row(self):
-        self.list.addAtHead(42)
-        self.list.addAtHead(15)
-        self.assertEqual(42,self.list.get(1))
-        self.assertEqual(15,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtHead", "addAtHead", "get" ]
+        params = [ [], [42], [15], [0] ]
+        expected_output = [[None], [None], [None], [15]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_after_add_at_tail(self):
-        self.list.addAtTail(85)
-        self.list.addAtHead(45)
-        self.assertEqual(45,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtTail", "addAtHead", "get" ]
+        params = [ [], [85], [45], [0] ]
+        expected_output = [[None], [None], [None], [45]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_after_get_operation(self):
-        self.populate_list(5)
-        self.list.get(0)
-        self.list.addAtHead(15)
-        self.assertEqual(15,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtIndex", "get", "addAtHead", "get" ]
+        params = [ [], [0,654], [0],[63], [0] ]
+        expected_output = [[None], [None], [654], [None], [63]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_after_add_at_index_0(self):
-        self.list.addAtIndex(0,45)
-        self.list.addAtHead(73)
-        self.assertEqual(73,self.list.get(0))
-
+        operations = [ "MyLinkedList", "addAtIndex", "addAtHead", "get" ]
+        params = [ [], [ 0, 45], [73], [0]]
+        expected_output = [[None], [None], [None], [73]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
+    
     def test_add_at_head_after_add_at_last_index(self):
-        self.list.addAtTail(45)
-        self.list.addAtIndex(1,19)
-        self.list.addAtHead(54)
-        self.assertEqual(54,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtTail", "addAtIndex", "addAtHead", "get" ]
+        params = [ [], [45], [1,19], [95], [0] ]
+        expected_output = [ [None], [None], [None], [None], [95]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
-
-    def test_add_at_head_after_add_at_random_index(self):
-        self.populate_list(10)
-        self.list.addAtIndex(7,28)
-        self.list.addAtHead(82)
-        self.assertEqual(82,self.list.get(0))
+    def test_add_at_head_after_add_at_middle_index(self):
+        operations = [ "MyLinkedList", "addAtIndex", "addAtIndex", "addAtIndex", "addAtIndex", "addAtHead", "get" ]
+        params = [ [], [0,25], [0,951],[0,28], [1,75], [82], [0] ]
+        expected_output = [ [None], [None], [None], [None], [None], [None], [82]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_after_delete_at_index_0(self):
-        self.populate_list(1000)
-        self.list.deleteAtIndex(0)
-        self.list.addAtHead(37)
-        self.assertEqual(37,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtIndex", "addAtIndex", "addAtIndex", "deleteAtIndex", "addAtHead", "get" ]
+        params = [ [], [0,25], [1,951], [0,28], [0],[37], [0] ]
+        expected_output = [ [None], [None], [None], [None], [None], [None], [37]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_after_delete_at_last_index(self):
-        self.populate_list(1000)
-        self.list.deleteAtIndex(999)
-        self.list.addAtHead(13)
-        self.assertEqual(13,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtIndex", "addAtIndex", "addAtIndex", "deleteAtIndex", "addAtHead", "get" ]
+        params = [ [], [0,25], [1,951], [0,28], [2],[13], [0] ]
+        expected_output = [ [None], [None], [None], [None], [None], [None], [13]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
-    def test_add_at_head_after_delete_at_random_index(self):
-        self.populate_list(1000)
-        self.list.deleteAtIndex(125)
-        self.list.addAtHead(45)
-        self.assertEqual(45,self.list.get(0))
+    def test_add_at_head_after_delete_at_middle_index(self):
+        operations = [ "MyLinkedList", "addAtIndex", "addAtIndex", "addAtIndex", "deleteAtIndex", "addAtHead", "get", "get"]
+        params = [ [], [0,25], [1,951], [0,28], [1],[96], [0] ]
+        expected_output = [ [None], [None], [None], [None], [None], [None], [96]]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_add_at_head_after_delete_all_elements(self):
-        self.populate_list(1000)
-        for i in range(1,1001):
-            self.list.deleteAtIndex(0)
-        self.list.addAtHead(46)
-        self.assertEqual(46,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtIndex", "addAtIndex", "addAtIndex", "deleteAtIndex", "deleteAtIndex","deleteAtIndex", "addAtHead", "get" ]
+        params = [ [], [0,25], [1,951], [0,28], [0], [0], [0], [96], [0] ]
+        expected_output = [ [None], [None], [None], [None], [None], [None], [None], [None], [96] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
 if __name__=="__main__":
     unittest.main()

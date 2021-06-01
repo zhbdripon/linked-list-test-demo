@@ -1,65 +1,55 @@
-from linked_list import MyLinkedList
-from random import randint
+from tests.utils import perform_operations
 import unittest
 
 class DeleteAtIndexTest(unittest.TestCase):
-    def setUp(self):
-        self.list = MyLinkedList()
 
     def test_delete_at_index_0_empty_list(self):
-        self.assertEqual(-1,self.list.deleteAtIndex(0))
+        operations = [ "MyLinkedList", "deleteAtIndex", "get" ]
+        params = [ [] , [0], [0] ]
+        expected_output = [ [None], [None], [-1] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_delete_at_index_0_list_not_empty(self):
-        self.list.addAtTail(14)
-        self.list.addAtTail(63)
-        self.list.addAtTail(35)
-        self.list.deleteAtIndex(0)
-        self.assertEqual(63,self.list.get(0))
-        self.assertEqual(35,self.list.get(1))
-        self.assertEqual(-1,self.list.get(2))
+        operations = [ "MyLinkedList", "addAtTail", "addAtTail", "addAtTail", "deleteAtIndex", "get", "get" ,"get"]
+        params = [ [] , [14], [63], [35], [0], [0], [1], [2] ]
+        expected_output = [ [None], [None], [None], [None], [None], [63], [35], [-1] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_delete_at_last_index(self):
-        self.list.addAtTail(14)
-        self.list.addAtTail(63)
-        self.list.addAtTail(96)
-        self.list.deleteAtIndex(2)
-        self.assertEqual(14,self.list.get(0))
-        self.assertEqual(63,self.list.get(1))       
+        operations = [ "MyLinkedList", "addAtTail", "addAtTail", "addAtTail", "deleteAtIndex", "get", "get"]
+        params = [ [] , [14], [63], [35], [2], [0], [1] ]
+        expected_output = [ [None], [None], [None], [None], [None], [14], [63] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )       
 
     def test_delete_at_invalid_index(self):
-        self.list.addAtTail(14)
-        self.list.addAtTail(63)
-        self.list.deleteAtIndex(2)
-        self.assertEqual(-1,self.list.deleteAtIndex(2))  
+        operations = [ "MyLinkedList", "addAtTail", "addAtTail", "deleteAtIndex", "get" ]
+        params = [ [] , [14], [63], [2], [2] ]
+        expected_output = [ [None], [None], [None], [None], [-1] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )  
 
     def test_delete_at_middle_index(self):
-        self.list.addAtTail(142)
-        self.list.addAtTail(41)
-        self.list.addAtTail(916)
-        self.list.deleteAtIndex(1)
-        self.assertEqual(142,self.list.get(0))
-        self.assertEqual(916,self.list.get(1))
+        operations = [ "MyLinkedList", "addAtTail", "addAtTail", "addAtTail", "deleteAtIndex", "get", "get" ]
+        params = [ [] , [142], [41], [916], [1], [0], [1] ]
+        expected_output = [ [None], [None], [None], [None], [None], [142], [916] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_delete_at_index_after_get_operation(self):
-        self.list.addAtTail(14)
-        self.list.addAtTail(63)
-        self.list.get(1)
-        self.list.deleteAtIndex(0)
-        self.assertEqual(63,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtTail", "addAtTail", "get", "deleteAtIndex", "get" ]
+        params = [ [] , [14], [63], [1], [0], [0] ]
+        expected_output = [ [None], [None], [None], [63], [None], [63] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_delete_at_index_after_add_to_head(self):
-        self.list.addAtHead(14)
-        self.list.addAtHead(63)
-        self.list.deleteAtIndex(0)
-        self.assertEqual(14,self.list.get(0))
+        operations = [ "MyLinkedList", "addAtHead", "addAtHead", "deleteAtIndex", "get" ]
+        params = [ [] , [14], [63], [0], [0] ]
+        expected_output = [ [None], [None], [None], [None], [14] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
     def test_delete_at_index_after_add_to_index(self):
-        self.list.addAtHead(14)
-        self.list.addAtHead(63)
-        self.list.addAtIndex(1,55)
-        self.list.deleteAtIndex(0)
-        self.assertEqual(55,self.list.get(0))
-        
+        operations = [ "MyLinkedList", "addAtHead", "addAtHead", "addAtIndex", "deleteAtIndex", "get" ]
+        params = [ [] , [14], [63], [1,55], [0], [0] ]
+        expected_output = [ [None], [None], [None], [None], [None], [55] ]
+        self.assertEqual(perform_operations(operations,params), expected_output )
 
 if __name__=="__main__":
     unittest.main()
