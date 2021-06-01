@@ -62,7 +62,6 @@ class MyLinkedList(object):
             prv = cur
             cur = cur.next
             cur_index+=1
-        return -1
 
     def __str__(self):
         ret = ""
@@ -74,15 +73,3 @@ class MyLinkedList(object):
                 ret += str(cur.data) + ' '
                 cur = cur.next
         return ret
-
-if __name__=="__main__":
-    mylist = MyLinkedList()
-    mylist.addAtHead(5)
-    mylist.addAtHead(7)
-    mylist.addAtTail(9)
-    mylist.addAtTail(15)
-    mylist.addAtIndex(0,99)
-    print(mylist)
-    print(mylist.get(0))
-    mylist.deleteAtIndex(3)
-    print(mylist)
